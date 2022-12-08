@@ -29,11 +29,13 @@
 - highlight hovered cells
 
 ##
-Difficulty - Nr of bombs - Height - Width:
-Easy            10           8        10
-Medium          40          14        18
-Hard            99          20        24
+| Difficulty | Nr of bombs | Height | Width |
+| -----------|-------------|--------|-------|
+| Easy       |  10         | 8      | 10    |
+| Mediu      |  40         |14      | 18    |
+| Hard       |  99         |20      | 24    |
 
+<br></br>
 ## Files:
 - board.py - board, cells and everything about them
 - game.py - interface
