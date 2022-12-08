@@ -84,6 +84,7 @@ class Game(tk.Tk):
         self.frame.update()
         self.new_game()
 
+    # restart game
     def new_game(self) -> None:
         if self.timer_id:
             self.after_cancel(self.timer_id)
@@ -97,6 +98,7 @@ class Game(tk.Tk):
         self.board.destroy()
         self.board = Board(self, self.diff)
 
+    # timer functionality
     def update_time(self) -> None:
         self.time += 1
         if self.time / 60 < 60:
@@ -105,6 +107,7 @@ class Game(tk.Tk):
             self.timer['text'] = CLOCK + strftime("%H:%M:%S", gmtime(self.time))
         self.timer_id = self.after(1000, self.update_time)
 
+    # updates mark counter
     def marks_update(self) -> None:
         self.marks_label['text'] = FLAG + f"{self.marks:02d}"
 

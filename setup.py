@@ -31,6 +31,8 @@ CLOCK = u"\U0001F551"
 
 Running = False
 
+# allows only 1 function to run
+# used when same variables are used across multiple functions
 def function_running(func = None):
     @functools.wraps(func)
     def inner(*args, **kwargs):

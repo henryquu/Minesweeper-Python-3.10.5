@@ -40,6 +40,7 @@ class Cell():
             )
         master.tag_bind(self.id, '<ButtonRelease-3>', self.mark_bomb)
 
+    # reveals the cell
     def reveal(self, *_) -> None:
         if self.master.itemcget(self.id, 'state') == 'disabled':
             return
@@ -94,6 +95,7 @@ class Cell():
 
         self.root.marks_update()
 
+    # creates text on the cell
     def add_text(self, text=None) -> None:
         if text is None:
             text = self.val
@@ -107,6 +109,7 @@ class Cell():
                     font='Arial, 14',
                     )
 
+    # these 2 functions are responsible for highlighting cell on cursor presence 
     def on_hover(self, *_) -> None:
         self.master.itemconfigure(self.id, fill='#bfe17d')
 
@@ -128,12 +131,14 @@ class Board(Canvas):
             row = [Cell(self, y, x, diff['cell']) for x in range(diff['width'])]
             self.board.append(row)
 
+    # mouse click functionality
     def click(self, cell) -> None:
         self.mine_gen(cell.row, cell.column)
         self.master.update_time()
         self.click = Cell.reveal
         self.click(cell)
 
+    # generating mines on an empty board
     @function_running
     def mine_gen(self, y: int, x: int) -> None:
         spawning_grid = self.adjacents(y, x)
@@ -150,6 +155,7 @@ class Board(Canvas):
                         self.board[y][x].val += 1
         self.mine = mine
 
+    # reveals all mines
     @function_running
     def mine_reveal(self) -> None:
         for y, x in self.mine:
@@ -159,6 +165,7 @@ class Board(Canvas):
             self.master.update()
             sleep(1 / self.diff['mines'])
 
+    # gets a list of adjacent cells
     def adjacents(self, y: int, x: int) -> list:
         adjacent = set()
         for yad in [-1, 0, 1]:
@@ -170,6 +177,7 @@ class Board(Canvas):
                         adjacent.add((indy, indx))
         return adjacent
 
+    # reveals adjecent empty cells when clicking on an empty cell
     def empty_reveal(self, row: int, column: int, visited: set) -> None:
         if (row, column) in visited:
             return
